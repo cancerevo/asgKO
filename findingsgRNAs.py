@@ -2,6 +2,7 @@ import functools
 import argparse
 from multiprocessing import Process
 import pandas as pd
+import re
 
 
 
@@ -205,7 +206,6 @@ def get_alignment_between_two_species(mouse1, mouse2):
 
 @functools.lru_cache(maxsize=None)
 def find_index_for_each_guide(mouse1, mouse2):
-    import re
 
     listofalignedsequences = get_alignment_between_two_species(mouse1, mouse2)
     mousealignedexonsequence = listofalignedsequences[0]
@@ -224,7 +224,12 @@ def find_index_for_each_guide(mouse1, mouse2):
                           targetseq[12] + r'-*' + targetseq[13] + r'-*' + targetseq[14] + r'-*' + targetseq[
                               15] + r'-*' + targetseq[16] + r'-*' + targetseq[17] + r'-*' + targetseq[18] + r'-*' + \
                           targetseq[19] + r'-*' + targetseq[20] + r'-*' + targetseq[21] + r'-*' + targetseq[22] + r')'
-        #print(searchregex)
+
+	# str.join can simplify the above command, e.g. 
+	searchregex2 = r'(?=' + r'-*'.join(targetseq) + r')'
+	assert searchregx == searchregex2
+	
+	#print(searchregex)
         for guide in re.finditer(searchregex, mousealignedexonsequence):
             listofguidestartindexes.append(guide.start())
                 # listofguidestartindexes = [guide.start() for guide in re.finditer(searchregex, exonsequenceforthisexon)]
@@ -336,7 +341,6 @@ def length_of_exons(mouse1):
 
 
 def target_cut_percentage(mouse1, mouse2):
-    import re
 
     targetseq_df = make_dataframe_for_targetseq_information(mouse1, mouse2)
     mouse1guides = targetseq_df['targetSeq_' + str(mouse1.species)]
