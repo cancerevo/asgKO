@@ -1,6 +1,7 @@
 import functools
 import argparse
 from multiprocessing import Process
+import pandas as pd
 
 
 
@@ -116,7 +117,6 @@ class Mouse:
 
 @functools.lru_cache(maxsize=None)
 def import_crispor_table(mouse):
-    import pandas as pd
     pd.set_option('display.max_columns', None)
 
     species = mouse.species
@@ -146,7 +146,7 @@ def import_crispor_table(mouse):
 
 @functools.lru_cache(maxsize=None)
 def combine_mouse_crispor_tables(mouse1, mouse2):
-    import pandas as pd
+#    import pandas as pd
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
     pd.set_option('expand_frame_repr', False)
@@ -246,7 +246,7 @@ def find_index_for_each_guide(mouse1, mouse2):
 
 
 def find_differences_between_guides(mouse1, mouse2):
-    import pandas as pd
+#    import pandas as pd
     listofalignedsequences = find_index_for_each_guide(mouse1, mouse2)[2]
     mouse1guides = find_index_for_each_guide(mouse1, mouse2)[0]
     mouse1listofguidestartindexes = find_index_for_each_guide(mouse1, mouse2)[1]
@@ -302,7 +302,7 @@ def find_differences_between_guides(mouse1, mouse2):
 
 
 def make_dataframe_for_targetseq_information(mouse1, mouse2):
-    import pandas as pd
+#    import pandas as pd
 
     mouse1guides = find_index_for_each_guide(mouse1, mouse2)[0]
     listsofinformationaboutmutations = find_differences_between_guides(mouse1, mouse2)[0]
@@ -377,7 +377,7 @@ def target_cut_percentage(mouse1, mouse2):
 
 
 def check_with_crispor_table(mouse1, mouse2, mouse1anti, mouse2anti):
-    import pandas as pd
+#    import pandas as pd
     crispor_df = combine_mouse_crispor_tables(mouse1, mouse2)
     combined_df = ''
     if __name__ == "__main__":
@@ -402,7 +402,7 @@ def check_with_crispor_table(mouse1, mouse2, mouse1anti, mouse2anti):
 
 
 def refined_crispor_table(mouse1, mouse2, mouse1anti, mouse2anti):
-    import pandas as pd
+#    import pandas as pd
     degeneratePAMnucleotidepositionandundesirablemutationlocations = [20, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3,
                                                                       2, 1, 0]
     sgrnasforaspecificgene_df = check_with_crispor_table(mouse1, mouse2, mouse1anti, mouse2anti)
