@@ -48,6 +48,7 @@ def make_crispor_tables():
 
 
 def reverseComplement(kwargs):
+	# This function could be replaced with https://biopython.org/docs/1.76/api/Bio.Seq.html#Bio.Seq.Seq.reverse_complement
     complementarynucleotides = {'T': 'A', 'G': 'C', 'C': 'G', 'A': 'T'}
     dictreversecomplement = {}
     for exonnumber in kwargs.keys():
@@ -71,6 +72,7 @@ class Mouse:
         self.exonsequence = self.exonsequence()
 
     def exonsequence(self):
+	"""Mouse.exonsequence() -> dict of exons, e.g. ('exon 1', 'AUG'), ('exon 2', 'AAG'), ...""""
         from Bio import SeqIO
 
         if self.species == 0:
