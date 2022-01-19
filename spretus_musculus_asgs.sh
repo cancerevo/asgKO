@@ -14,6 +14,10 @@ species1='ens90MusMus'      # Mus Musculus
 species2='GCA_001624865.1'  # Mus Spretus
 output_suffix='.txt'        # suffix to append to output. Could also be .tsv
 
+touch $GENE_FASTA_DIR/$output_name+$species1+$version+$output_suffix
+touch $GENE_FASTA_DIR/$output_name+$species2+$version+$output_suffix
+touch $output_name+$species1+$species2+$version
+
 versions=('-m' '-control')  # Finds unique guides, then homozygous KO guides
 for version in ${versions[@]}; do 
 python3.6 findingsgRNAs.py $version \
@@ -22,5 +26,6 @@ python3.6 findingsgRNAs.py $version \
   $GENE_FASTA_DIR/$output_name+$species1+$version+$output_suffix \
   $GENE_FASTA_DIR/$gene2 \
   $species2 \
-  $GENE_FASTA_DIR/$output_name+$species2+$version+$output_suffix
+  $GENE_FASTA_DIR/$output_name+$species2+$version+$output_suffix \
+  $output_name+$species1+$species2+$version
 done
